@@ -7,4 +7,8 @@ def make_callback_data(level, subject="0", course="0"):
     return menu_cd.new(level=level, subject=subject, course=course)
 
 
+# Subject menu CallbackData
 menu_cd = CallbackData("show_menu", "level", "subject", "course")
+
+# Admin CallbackData
+admin_cd = CallbackData("admin_menu", "action", "aim")

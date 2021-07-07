@@ -1,0 +1,16 @@
+{
+  "menu": {
+    "reviews": {
+      "text": "<i>Текст отзывов</i>",
+      "parse_mode": "html"
+    },
+    "faq": {
+      "text": "Текст FAQ",
+      "parse_mode": null
+    },
+    "vacancies": {
+      "text": "Текст вакансий",
+      "parse_mode": null
+    }
+  }
+}

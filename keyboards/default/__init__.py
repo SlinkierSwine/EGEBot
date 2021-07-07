@@ -1,1 +1,1 @@
-from .menu import menu_kb
+from .menu_default_keyboards import menu_kb

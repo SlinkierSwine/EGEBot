@@ -2,15 +2,9 @@ from typing import Union
 
 from aiogram.types import Message, CallbackQuery
 
-from keyboards.default.menu import menu_kb
 from keyboards.inline.callback_datas import menu_cd
-from keyboards.inline.menu_subjects import list_subjects_keyboard, list_courses_keyboard, course_keyboard
+from keyboards.inline.menu_subjects_inline_keyboards import list_subjects_keyboard, list_courses_keyboard, course_keyboard
 from loader import dp, db
-
-
-@dp.message_handler(commands=['start'])
-async def bot_start(message: Message):
-    await message.answer(f"Привет, {message.from_user.full_name}!", reply_markup=menu_kb)
 
 
 @dp.message_handler(lambda message: message.text == 'Предметы')
@@ -37,7 +31,7 @@ async def show_course(callback: CallbackQuery, subject, course, **kwargs):
     markup = await course_keyboard(subject, course)
 
     item = await db.get_course(course)
-    text = f'Купить {item[1]} за {item[3]}'
+    text = f'Имя: {item[1]}\n\nЦена: {item[3]} руб\n\n{item[2]}'
 
     await callback.message.edit_text(text=text, reply_markup=markup)
 

@@ -1,2 +1,2 @@
-from . import menu_subjects
-from . import menu
+from . import menu_subjects_handlers
+from . import menu_handlers

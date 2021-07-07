@@ -46,10 +46,10 @@ async def list_courses_keyboard(subject):
     # пользователя на уровень назад - на уровень 0.
     markup.row(
         InlineKeyboardButton(
-            text="Назад",
+            text="⬅️Назад",
             callback_data=make_callback_data(level=CURRENT_LEVEL - 1)),
         InlineKeyboardButton(
-            text='Домой',
+            text='🏠Домой',
             callback_data=make_callback_data(level=0)
         )
     )
@@ -67,11 +67,11 @@ async def course_keyboard(subject, course):
     # пользователя на уровень назад - на уровень 1 - на выбор подкатегории
     markup.row(
         InlineKeyboardButton(
-            text="Назад",
+            text="⬅️Назад",
             callback_data=make_callback_data(level=CURRENT_LEVEL - 1,
                                              subject=subject)),
         InlineKeyboardButton(
-            text='Домой',
+            text='🏠Домой',
             callback_data=make_callback_data(level=0)
         )
     )
