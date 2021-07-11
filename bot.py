@@ -1,3 +1,5 @@
+import asyncio
+
 from aiogram.utils import executor
 
 from loader import dp, bot, db
@@ -6,6 +8,7 @@ import middleware, handlers
 
 
 async def on_startup(dp):
+    await asyncio.sleep(10)
     await db.create_tables()
 
 
