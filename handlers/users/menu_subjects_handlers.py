@@ -31,7 +31,7 @@ async def show_course(callback: CallbackQuery, subject, course, **kwargs):
     markup = await course_keyboard(subject, course)
 
     item = await db.get_course(course)
-    text = f'Имя: {item[1]}\n\nЦена: {item[3]} руб\n\n{item[2]}'
+    text = f'Имя: {item[1]}\n\nЦена: {item[3]} руб\n\n{item[2] if item[2] else "Нет описания"}\n\nДля покупки: @hagguz'
 
     await callback.message.edit_text(text=text, reply_markup=markup)
 

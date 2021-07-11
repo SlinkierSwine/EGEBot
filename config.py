@@ -5,9 +5,11 @@ from dotenv import load_dotenv
 from data.parse_json_texts import parse
 
 load_dotenv()
-logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
-                    level=logging.INFO,
-                    )
+logging.basicConfig(
+    filename='log.log',
+    format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
+    level=logging.INFO,
+)
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 API_TOKEN = os.getenv('API_TOKEN')

@@ -22,7 +22,7 @@ class DataBase:
     async def create_tables(self):
         await self._create_connection()
         self._cursor.execute('''
-            CREATE TABLE course (
+            CREATE TABLE IF NOT EXISTS course (
                 id INTEGER NOT NULL,
                 name VARCHAR NOT NULL,
                 description VARCHAR,
@@ -32,7 +32,7 @@ class DataBase:
                 FOREIGN KEY (subject_id) REFERENCES subject(id)
             )''')
         self._cursor.execute('''
-            CREATE TABLE subject (
+            CREATE TABLE IF NOT EXISTS subject (
                 id INTEGER NOT NULL,
                 name VARCHAR,
                 PRIMARY KEY (id)

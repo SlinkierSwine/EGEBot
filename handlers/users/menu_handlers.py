@@ -8,7 +8,6 @@ from loader import dp
 
 @dp.message_handler(commands=['start'])
 async def bot_start(message: Message):
-    print(message.from_user.id)
     await message.answer(f"Привет, {message.from_user.full_name}!", reply_markup=menu_kb)
 
 
