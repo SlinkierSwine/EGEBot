@@ -10,34 +10,40 @@ from states.admin_states import DeleteSubjectStates
 @dp.message_handler(state=DeleteSubjectStates.ask_id)
 async def delete_subject_id(message: Message, state: FSMContext):
     subject_id = message.text
-    await state.update_data(id=subject_id)
 
-    courses = await db.get_list_courses(subject_id)
-
-    if courses:
-
-        text = ''
-        for c in courses:
-            text += f'Название: <b>{c[1]}</b>, id: <b>{c[0]}</b>\n'
-
-        await message.answer('У данного предмета есть следующие курсы.'
-                             ' При удалении предмета эти курсы так же удалятся.\n\n' +
-                             text +
-                             '\nПродолжить?("+"/"-")')
-        await DeleteSubjectStates.next()
+    if subject_id == 'Отмена':
+        await state.finish()
+        await message.answer('Действие отменено')
 
     else:
-        try:
-            await db.delete_subject(await state.get_data())
+        await state.update_data(id=subject_id)
 
-        except Exception as e:
-            logging.error(e)
-            await message.answer('Ошибка: ' + e.__str__())
+        courses = await db.get_list_courses(subject_id)
+
+        if courses:
+
+            text = ''
+            for c in courses:
+                text += f'Название: <b>{c[1]}</b>, id: <b>{c[0]}</b>\n'
+
+            await message.answer('У данного предмета есть следующие курсы.'
+                                 ' При удалении предмета эти курсы так же удалятся.\n\n' +
+                                 text +
+                                 '\nПродолжить?("+"/"-")')
+            await DeleteSubjectStates.next()
 
         else:
-            await message.answer('Предмет успешно удален')
+            try:
+                await db.delete_subject(await state.get_data())
 
-        await state.finish()
+            except Exception as e:
+                logging.error(e)
+                await message.answer('Ошибка: ' + e.__str__())
+
+            else:
+                await message.answer('Предмет успешно удален')
+
+            await state.finish()
 
 
 @dp.message_handler(state=DeleteSubjectStates.ask_confirm)

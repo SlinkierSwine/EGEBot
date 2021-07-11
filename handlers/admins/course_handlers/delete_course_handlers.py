@@ -11,14 +11,19 @@ from states.admin_states import DeleteCourseStates
 async def delete_course_id(message: Message, state: FSMContext):
     course_id = message.text
 
-    try:
-        await db.delete_course({'id': course_id})
-
-    except Exception as e:
-        logging.error(e)
-        await message.answer('Ошибка: ' + e.__str__())
+    if course_id == 'Отмена':
+        await state.finish()
+        await message.answer('Действие отменено')
 
     else:
-        await message.answer('Курс успешно удален')
+        try:
+            await db.delete_course({'id': course_id})
 
-    await state.finish()
+        except Exception as e:
+            logging.error(e)
+            await message.answer('Ошибка: ' + e.__str__())
+
+        else:
+            await message.answer('Курс успешно удален')
+
+        await state.finish()

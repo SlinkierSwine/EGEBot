@@ -19,7 +19,7 @@ def is_admin(func):
 @dp.message_handler(commands='admin')
 async def admin(message: Message):
     markup = await admin_keyboard()
-    await message.answer('Выберите действие:', reply_markup=markup)
+    await message.answer('Выберите действие.\nЧтобы отменить любое действие напишите "Отмена":', reply_markup=markup)
 
 
 @dp.callback_query_handler(admin_cd.filter(action='add'))

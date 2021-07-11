@@ -9,11 +9,16 @@ from states.admin_states import AddSubjectStates
 async def add_subject_name(message: Message, state: FSMContext):
     subject_name = message.text
 
-    try:
-        await db.add_subject(subject_name)
-    except Exception as e:
-        await message.answer(e.__str__())
-    else:
-        await message.answer('Предмет добавлен')
+    if subject_name == 'Отмена':
+        await state.finish()
+        await message.answer('Действие отменено')
 
-    await state.finish()
+    else:
+        try:
+            await db.add_subject(subject_name)
+        except Exception as e:
+            await message.answer(e.__str__())
+        else:
+            await message.answer('Предмет добавлен')
+
+        await state.finish()

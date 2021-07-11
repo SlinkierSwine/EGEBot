@@ -7,7 +7,7 @@ from keyboards.inline.menu_subjects_inline_keyboards import list_subjects_keyboa
 from loader import dp, db
 
 
-@dp.message_handler(lambda message: message.text == 'Предметы')
+@dp.message_handler(lambda message: message.text == '📚Предметы')
 async def list_subjects(message: Union[CallbackQuery, Message], **kwargs):
     markup = await list_subjects_keyboard()
 
